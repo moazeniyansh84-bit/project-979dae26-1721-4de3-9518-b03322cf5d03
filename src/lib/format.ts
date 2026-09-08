@@ -1,5 +1,7 @@
+const FA_DIGITS = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+
 export function toFa(n: number | string) {
-  return String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+  return String(n).replace(/\d/g, (d) => FA_DIGITS[Number(d)] ?? d);
 }
 
 export function formatPrice(value: number) {
