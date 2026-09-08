@@ -6,13 +6,15 @@ import { categoriesQuery, productsQuery } from "@/lib/catalog";
 import { ProductCard } from "@/components/ProductCard";
 import { AGE_LABELS, GENDER_LABELS, finalPrice, formatPrice, toFa } from "@/lib/format";
 
-type ProductSearch = { cat: string | undefined; q: string | undefined };
+type ProductSearch = { cat?: string; q?: string };
 
 export const Route = createFileRoute("/products/")({
-  validateSearch: (search: Record<string, unknown>): ProductSearch => ({
-    cat: typeof search["cat"] === "string" ? search["cat"] : undefined,
-    q: typeof search["q"] === "string" ? search["q"] : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): ProductSearch => {
+    const out: ProductSearch = {};
+    if (typeof search["cat"] === "string") out.cat = search["cat"];
+    if (typeof search["q"] === "string") out.q = search["q"];
+    return out;
+  },
   head: () => ({
     meta: [
       { title: "همه محصولات | تک شاخ کیدز" },
