@@ -1,11 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, Globe } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { settingsQuery } from "@/lib/catalog";
 
 const PHONE_E164 = "09227094526";
 const PHONE_FA = "۰۹۲۲۷۰۹۴۵۲۶";
 const ADDRESS = "تهران، ستارخان، خیابان شادمهر، پلاک ۳۰۳، فروشگاه تک شاخ کیدز";
+const WEBSITE_URL = "www.takshakhkids.ir";
 
 export function SiteFooter() {
+  const { data: settings } = useQuery({
+    ...settingsQuery,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const hours = settings?.business_hours ?? "شنبه تا پنجشنبه، ۱۰ تا ۱۸";
+  const website = settings?.website_url ?? WEBSITE_URL;
+
   return (
     <footer className="mt-16 border-t border-border bg-secondary/40">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
@@ -13,6 +24,10 @@ export function SiteFooter() {
           <p className="text-base font-extrabold text-foreground">تک شاخ کیدز</p>
           <p className="text-sm leading-6 text-muted-foreground">
             لباس، کیف و اکسسوری کودک و نوجوان با بهترین کیفیت و قیمت مناسب.
+          </p>
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Globe className="size-4 shrink-0" />
+            <span dir="ltr">{website}</span>
           </p>
         </div>
         <div className="space-y-2 text-sm">
@@ -46,7 +61,12 @@ export function SiteFooter() {
             <MapPin className="mt-0.5 size-4 shrink-0" />
             <span>{ADDRESS}</span>
           </p>
-          <p>پاسخگویی: شنبه تا پنجشنبه، ۱۰ تا ۱۸</p>
+          <p className="flex items-start gap-2">
+            <span className="mt-0.5 grid size-4 shrink-0 place-items-center text-[10px] font-bold text-foreground">
+              ساعت
+            </span>
+            <span>{hours}</span>
+          </p>
         </div>
       </div>
       <p className="border-t border-border py-4 text-center text-xs text-muted-foreground">
@@ -55,4 +75,3 @@ export function SiteFooter() {
     </footer>
   );
 }
-
