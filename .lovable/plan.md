@@ -5,9 +5,13 @@ Add a full shipping-address form to the cart/order flow, calculate shipping tran
 
 ## What will be built
 
+### 0. Store website URL
+Add the store website address exactly as `www.takshakhkids.ir` to the footer, the contact page, and any store-information section before the rest of the plan is implemented.
+
 ### 1. Database schema (migration)
 New tables:
 - `orders` — guest checkout: recipient name, mobile, province, city, region/neighborhood, full address, building number, unit, postal code, shipping cost, total amount, status.
+
 - `order_items` — line items per order (product name, price, qty, size).
 - `shipping_rates` — editable rates: label, province, city, region, cost, free-shipping threshold.
 - `settings` — simple key/value store for business hours and the global free-shipping threshold.
