@@ -24,6 +24,21 @@ export type Product = {
   is_active: boolean;
 };
 
+export type ShippingRate = {
+  id: string;
+  label: string;
+  province: string | null;
+  city: string | null;
+  region: string | null;
+  cost: number;
+  free_threshold: number | null;
+  sort_order: number;
+  is_default: boolean;
+};
+
+export type SettingKey = "business_hours" | "website_url" | "free_shipping_threshold";
+export type Settings = Partial<Record<SettingKey, string>>;
+
 export const categoriesQuery = queryOptions({
   queryKey: ["categories"],
   queryFn: async (): Promise<Category[]> => {
@@ -45,5 +60,28 @@ export const productsQuery = queryOptions({
       .order("created_at", { ascending: false });
     if (error) throw error;
     return (data ?? []) as Product[];
+  },
+});
+
+export const shippingRatesQuery = queryOptions({
+  queryKey: ["shipping_rates"],
+  queryFn: async (): Promise<ShippingRate[]> => {
+    const { data, error } = await supabase
+      .from("shipping_rates")
+      .select("*")
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as ShippingRate[];
+  },
+});
+
+export const settingsQuery = queryOptions({
+  queryKey: ["settings"],
+  queryFn: async (): Promise<Settings> => {
+    const { data, error } = await supabase.from("settings").select("key, value");
+    if (error) throw error;
+    return Object.fromEntries(
+      (data ?? []).map((s) => [s.key, s.value]),
+    ) as Settings;
   },
 });
