@@ -9,7 +9,9 @@ const NAV = [
   { to: "/", label: "خانه" },
   { to: "/products", label: "همه محصولات" },
   { to: "/offers", label: "تخفیف‌دار" },
+  { to: "/contact", label: "تماس با ما" },
 ] as const;
+
 
 export function SiteHeader() {
   const { count } = useCart();
