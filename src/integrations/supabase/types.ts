@@ -41,6 +41,104 @@ export type Database = {
         }
         Relationships: []
       }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          order_id: string
+          price: number
+          product_id: string | null
+          qty: number
+          size: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          order_id: string
+          price: number
+          product_id?: string | null
+          qty: number
+          size?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          order_id?: string
+          price?: number
+          product_id?: string | null
+          qty?: number
+          size?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          address: string
+          building_number: string | null
+          city: string
+          created_at: string
+          customer_name: string
+          id: string
+          mobile: string
+          note: string | null
+          postal_code: string | null
+          province: string
+          region: string | null
+          shipping_cost: number
+          status: string
+          total_amount: number
+          unit: string | null
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          building_number?: string | null
+          city: string
+          created_at?: string
+          customer_name: string
+          id?: string
+          mobile: string
+          note?: string | null
+          postal_code?: string | null
+          province: string
+          region?: string | null
+          shipping_cost?: number
+          status?: string
+          total_amount?: number
+          unit?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          building_number?: string | null
+          city?: string
+          created_at?: string
+          customer_name?: string
+          id?: string
+          mobile?: string
+          note?: string | null
+          postal_code?: string | null
+          province?: string
+          region?: string | null
+          shipping_cost?: number
+          status?: string
+          total_amount?: number
+          unit?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           age_group: string
@@ -102,6 +200,66 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      shipping_rates: {
+        Row: {
+          city: string | null
+          cost: number
+          created_at: string
+          free_threshold: number | null
+          id: string
+          is_default: boolean
+          label: string
+          province: string | null
+          region: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          cost?: number
+          created_at?: string
+          free_threshold?: number | null
+          id?: string
+          is_default?: boolean
+          label: string
+          province?: string | null
+          region?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          cost?: number
+          created_at?: string
+          free_threshold?: number | null
+          id?: string
+          is_default?: boolean
+          label?: string
+          province?: string | null
+          region?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
