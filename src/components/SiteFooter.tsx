@@ -1,4 +1,9 @@
 import { Link } from "@tanstack/react-router";
+import { MapPin, Phone } from "lucide-react";
+
+const PHONE_E164 = "09227094526";
+const PHONE_FA = "۰۹۲۲۷۰۹۴۵۲۶";
+const ADDRESS = "تهران، ستارخان، خیابان شادمهر، پلاک ۳۰۳، فروشگاه تک شاخ کیدز";
 
 export function SiteFooter() {
   return (
@@ -21,13 +26,26 @@ export function SiteFooter() {
           <Link to="/cart" className="block text-muted-foreground hover:text-foreground">
             سبد خرید
           </Link>
+          <Link to="/contact" className="block text-muted-foreground hover:text-foreground">
+            تماس با ما
+          </Link>
           <Link to="/admin" className="block text-muted-foreground hover:text-foreground">
             ورود مدیر
           </Link>
         </div>
-        <div className="space-y-2 text-sm text-muted-foreground">
+        <div className="space-y-3 text-sm text-muted-foreground">
           <p className="font-bold text-foreground">ارتباط با ما</p>
-          <p>ارسال به سراسر ایران</p>
+          <a
+            href={`tel:${PHONE_E164}`}
+            className="flex items-center gap-2 text-foreground hover:underline"
+          >
+            <Phone className="size-4" />
+            <span dir="ltr">{PHONE_FA}</span>
+          </a>
+          <p className="flex items-start gap-2">
+            <MapPin className="mt-0.5 size-4 shrink-0" />
+            <span>{ADDRESS}</span>
+          </p>
           <p>پاسخگویی: شنبه تا پنجشنبه، ۱۰ تا ۱۸</p>
         </div>
       </div>
@@ -37,3 +55,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+
